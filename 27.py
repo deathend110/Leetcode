@@ -21,6 +21,9 @@ class Solution(object):
         # 记录是否开始遇到指定val
         length :int = len(nums)
 
+        if length == 1 and nums[0] == val:
+            return 0
+
         # 指向一个val值的指针
         pv: int = 0
 
@@ -32,24 +35,27 @@ class Solution(object):
 
         while(1):
             if(pv >= length-1 or pnv >= length-1):
-                return int(length-k), nums
-
+                return int(length-k)
+            
             if(nums[pv] != val):
                 pv += 1
                 pnv = pv
-            elif(nums[pv] == val):
-                # flag = 1
+            elif(nums[pv] == val and pv+1 != length):
                 pnv = self.findPnv(nums, val, pv)
                 # exchange
                 temp = nums[pv]
                 nums[pv] = nums[pnv]
                 nums[pnv] = temp
                 k += 1
-
                 pv += 1
                 pnv += 1
+            else:
+                k+=1
+                nums.pop(pv)
+                
+                  
 
-
+            
     def findPnv(self, nums, val, pv):
         pnv = pv + 1
         while(1):
@@ -59,8 +65,8 @@ class Solution(object):
                 pnv += 1
 
 if __name__ == "__main__":
-    nums = [0,1,2,2,3,0,4,2]
-    val = 2
+    nums = [1]
+    val = 1
     S = Solution()
     r = S.removeElement(nums, val)
     pass
