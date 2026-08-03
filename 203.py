@@ -22,30 +22,79 @@ class ListNode:
             p = temp
 
         return head
-        
+
+    def printChainList(self, head):
+        p = head
+        while(p != None):
+            print(p.val)
+            p = p.next
+        print("\n")
+
 class Solution:
     def removeElements(self, head: Optional[ListNode], val: int) -> Optional[ListNode]:
-        p = head
+        if head == None:
+            return head
 
-        while(p != None):
+        if head.next == None:
+            if(head.val ==  val):
+                head = None
+            return head
+
+        slow = head
+        fast = head.next
+
+        while(fast != None):
             # 特殊情况，删除头指针
-            if(p.val == val and p == head):
+            if(slow.val == val and slow == head):
                 head = head.next
-                p = head
-            elif(p.next.val == val):
-                p.next = p.next.next
-                p = p.next
+                slow = head
+                fast = head.next
+            elif(fast.val == val):
+                slow.next = fast.next
+                fast = slow.next
             else:
-                p = p.next
+                fast = fast.next
+                slow = slow.next
+
+        while(slow != None):
+            if(slow == head and slow.val == val):
+                head = None
+                slow = head
+            else:
+                slow = slow.next
 
         return head
 
+class Solution:
+    def removeElements(self, head: Optional[ListNode], val: int) -> Optional[ListNode]:
+        dummy = ListNode()
+        dummy.next = head
+        cur = head
+        prev = dummy
+        while cur:
+            if cur.val == val:
+                prev.next = cur.next
+            # prev = prev.next
+                cur = cur.next
+            else:
+                prev = prev.next
+                cur = cur.next
+        return dummy.next
+
 if __name__ == "__main__":
-    nums = [1,2,6,3,4,5,6]
-    val = 6
+    nums = [7,7,7,7]
+    val = 7
+    # nums = [1,2]
+    # val = 1
+    # nums = [1]
+    # val = 2
+    # nums = [1]
+    # val = 1
     head = ListNode()
     head = head.asChainList(nums)
+    head.printChainList(head)
 
     s = Solution()
     head = s.removeElements(head, val)
+    head.printChainList(head)
     pass
