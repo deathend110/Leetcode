@@ -9,16 +9,32 @@ class Solution:
         if target in nums:
             return 1
 
-        res = 0
+        res = 0xffffffff
         lenght = len(nums)
         left = 0
-        right = 1
+        right = 0
+        cur_sum = nums[left]
 
-        while(left != right and right <= lenght):
-            if(sum(nums[left:right]) < target):
+        while(right < lenght):
+            if(cur_sum < target):
                 right += 1
-            elif(sum(nums[left:right]) >= target):
-                res = len(nums[left:right])
+                if right >= lenght:
+                    break
+                cur_sum += nums[right]
+            elif(cur_sum >= target):
+                if right - left + 1 < res:
+                    res = right - left + 1
+                cur_sum -= nums[left]
                 left += 1
 
+        if res == 0xffffffff:
+            res = 0
         return res
+
+    
+if __name__ == "__main__":
+    nums = [2,3,1,2,4,3]
+    target = 7
+    S = Solution()
+    r = S.minSubArrayLen(target, nums)
+    pass
