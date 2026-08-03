@@ -47,19 +47,23 @@ class MyLinkedList:
     # 如果 index 等于链表的长度，那么该节点会被追加到链表的末尾。
     # 如果 index 比长度更大，该节点将 不会插入 到链表中。
     def addAtIndex(self, index: int, val: int) -> None:
-        p :ListNode = self.dummy
-        pi = 0
-        while(p != None):
-            if(index == pi):
-                temp :ListNode = ListNode(val=val)
-                temp.next = p.next
-                p.next = temp
-                self.size += 1
-                break
+        if index > self.size or index < 0:
+            return
 
-            pi += 1
-            p = p.next
-        return
+        if index == 0:
+            self.addAtHead(val)
+            return
+
+        if index == self.size:
+            self.addAtTail(val)
+            return
+
+        prev = self.dummy
+        for _ in range(index):
+            prev = prev.next
+
+        prev.next = ListNode(val, prev.next)
+        self.size += 1
 
     # 如果下标有效，则删除链表中下标为 index 的节点。
     def deleteAtIndex(self, index: int) -> None:
