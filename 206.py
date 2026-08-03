@@ -111,16 +111,10 @@ class MyLinkedList:
 
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        nums = []
-        p :ListNode = head
-        while(p != None):
-            nums.append(p.val)
-            p = p.next
+        # 双指针法改变链表指针朝向
+        res :ListNode = head
 
-        nums.reverse()
-        mylinkedlist = MyLinkedList()
-        mylinkedlist.list2LinkerList(nums)
-        return mylinkedlist.dummy.next
+        return res
 
 if __name__ == "__main__":
     LinkedList_1 = MyLinkedList()
