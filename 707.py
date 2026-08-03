@@ -83,21 +83,14 @@ class MyLinkedList:
 
     # 输入list， 刷新为这个对象存储的LinkedList
     def list2LinkerList(self, nums):
-        length = len(nums)
-        self.size += length
-        head :ListNode = ListNode()
-        p :ListNode = head
-        for i in range(length):
-            p.val = nums[i]
-            if(i == length - 1):
-                break
-            temp = ListNode()
-            p.next = temp
-            p = temp
-            self.tail = p
+        # 先清空原链表
+        self.dummy.next = None
+        self.tail = self.dummy
+        self.size = 0
 
-        # 虚拟头节点插入
-        self.dummy.next = head
+        # 逐个追加，不使用 len() 和下标访问
+        for val in nums:
+            self.addAtTail(val)
 
     # 输出链表
     def printLinkedList(self):
@@ -106,7 +99,7 @@ class MyLinkedList:
         while(p != None):
             print(p.val, end=", ")
             p = p.next
-        print("} \n")
+        print("}")
 
     # 返回链表长度
     def __len__(self):
@@ -115,31 +108,14 @@ class MyLinkedList:
 
 if __name__ == "__main__":
     myLinkedList = MyLinkedList()
-    nums = [1, 2, 3, 4, 5, 6, 7, 10]
-    # myLinkedList.list2LinkerList(nums)
-    # myLinkedList.printLinkedList()
-    # print(len(myLinkedList))
-
-    index = -1
-    val = 2
-    # param_1 = myLinkedList .get(index)
-
-    myLinkedList.addAtHead(1)
-    myLinkedList.printLinkedList()
-    print(len(myLinkedList))
-    myLinkedList.addAtTail(3)
+    nums = [1,2,3,4,5]
+    myLinkedList.list2LinkerList(nums)
     myLinkedList.printLinkedList()
     print(len(myLinkedList))
 
-    myLinkedList.addAtIndex(1, 2);    # 链表变为 1->2->3
+    nums = []
+    myLinkedList.list2LinkerList(nums)
     myLinkedList.printLinkedList()
-    print(len(myLinkedList))
-
-    r = myLinkedList.get(1);              # 返回 2
-
-    myLinkedList.deleteAtIndex(1);    # 现在，链表变为 1->3
-    myLinkedList.printLinkedList()
-    r = myLinkedList.get(1);              # 返回 3
     print(len(myLinkedList))
 
     pass
