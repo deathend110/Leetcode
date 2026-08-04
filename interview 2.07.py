@@ -138,21 +138,44 @@ def intersectLinkedList(intersectVal: int, listA: list, listB: list,
 
 class Solution:
     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
-        # 先写个暴力解法:O^n2
-        # 初步确定对a,b分别设置一个指针.先判断val相等,确定val等后确定地址相等
-        # 当val和地址都等后,指针指向的就是交界点, 返回这个节点, 不相交返回None
+        # 双指针思路是：先分别计算两个链表的size。让两个指针对齐。然后一起移动直到遇见交点即可
         pa: ListNode = headA
         pb: ListNode = headB
 
+        lengthA = 0
+        lengthB = 0
         while(pa != None):
-
-            while(pb != None):
-                if(pa.val == pb.val):
-                    if(pa is pb):
-                        return pa
-                pb = pb.next
-            pb = headB
+            lengthA += 1
             pa = pa.next
+        while(pb != None):
+            lengthB += 1
+            pb = pb.next
+
+        # 重置pa，pb 
+        pa = headA
+        pb = headB
+
+        # 判断A，B哪个是更长的：
+        # 然后让长指针的移动skip点
+        skip = 0
+        if(lengthA >= lengthB):
+            skip = lengthA - lengthB
+            while(skip > 0):
+                pa = pa.next
+                skip -= 1
+        else: 
+            skip = lengthB - lengthA
+            while(skip > 0):
+                pb = pb.next
+                skip -= 1
+
+        # 然后从这里开始判断pa is pb
+        while(pa != None):
+            if(pa is pb):
+                return pa
+            pa = pa.next
+            pb = pb.next
+        
         return None
 
 
