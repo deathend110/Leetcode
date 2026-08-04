@@ -151,7 +151,7 @@ class Solution:
                     if(pa is pb):
                         return pa
                 pb = pb.next
-
+            pb = headB
             pa = pa.next
         return None
 
