@@ -111,10 +111,31 @@ class MyLinkedList:
 
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        # 空链表
+        if head == None:
+            return
+        # 单节点链表
+        if head.next == None:
+            return head
+        
         # 双指针法改变链表指针朝向
-        res :ListNode = head
+        pre :ListNode = None
+        cur :ListNode = head
+        temp :ListNode = cur.next
 
-        return res
+        while(temp != None):
+            cur.next = pre
+            pre = cur
+            cur = temp
+            temp = cur.next
+
+        # 当退出循环，temp = None， 剩下一个cur指向None
+        # 让cur指向pre并返回cur,此时cur就是翻转链表的head
+        cur.next = pre
+
+        return cur
+
+    
 
 if __name__ == "__main__":
     LinkedList_1 = MyLinkedList()
@@ -125,5 +146,5 @@ if __name__ == "__main__":
     head :ListNode = LinkedList_1.dummy.next
     s = Solution()
     res = s.reverseList(head=head)
-
+    
     pass
