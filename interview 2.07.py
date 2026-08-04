@@ -138,11 +138,22 @@ def intersectLinkedList(intersectVal: int, listA: list, listB: list,
 
 class Solution:
     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
-        # 初步确定对a,b分别设置一对快慢指针.快指针定位判断val相等,慢指针在快指针确定val等后确定地址相等
-        # 当两对快慢指针都等后,慢指针指向的就是交界点, 返回这个节点, 不相交返回None
-        
+        # 先写个暴力解法:O^n2
+        # 初步确定对a,b分别设置一个指针.先判断val相等,确定val等后确定地址相等
+        # 当val和地址都等后,指针指向的就是交界点, 返回这个节点, 不相交返回None
+        pa: ListNode = headA
+        pb: ListNode = headB
 
-        return
+        while(pa != None):
+
+            while(pb != None):
+                if(pa.val == pb.val):
+                    if(pa is pb):
+                        return pa
+                pb = pb.next
+
+            pa = pa.next
+        return None
 
 
 if __name__ == "__main__":
