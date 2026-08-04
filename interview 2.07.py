@@ -138,7 +138,9 @@ def intersectLinkedList(intersectVal: int, listA: list, listB: list,
 
 class Solution:
     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
-
+        # 初步确定对a,b分别设置一对快慢指针.快指针定位判断val相等,慢指针在快指针确定val等后确定地址相等
+        # 当两对快慢指针都等后,慢指针指向的就是交界点, 返回这个节点, 不相交返回None
+        
 
         return
 
@@ -150,11 +152,11 @@ if __name__ == "__main__":
     skipA = 2
     skipB = 3
 
-    intersectVal = 1
-    listA = [1, 1,2,3]
-    listB = [1,1,2,3]
-    skipA = 1
-    skipB = 1
+    # intersectVal = 1
+    # listA = [1, 1,2,3]
+    # listB = [1,1,2,3]
+    # skipA = 1
+    # skipB = 1
 
     headA: ListNode = None
     headB: ListNode = None
