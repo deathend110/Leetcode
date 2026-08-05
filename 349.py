@@ -8,10 +8,11 @@ class Solution:
     # 输出结果中的每个元素一定是 唯一 的。我们可以 不考虑输出结果的顺序
     def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
         d1 = set(nums1)
-        d2 = set(nums2)
-
-        d = d1 & d2
-        return list(d)
+        res = []
+        for i in nums2:
+            if(i in d1 and i not in res):
+                res.append(i)
+        return res
 
 if __name__ == "__main__":
     solution = Solution()
