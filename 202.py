@@ -11,13 +11,43 @@ from typing import List
 # 如果 n 是 快乐数 就返回 true ；不是，则返回 false 。
 
 class Solution:
-    def isHappy(self, n: int) -> bool:
+    def __init__(self):
+        # 记录num拆分出的数组
+        self.nums = []
+        
 
+    def isHappy(self, n: int) -> bool:
+        d = set()
+        
+        while(n not in d):
+            d.add(n)
+            self.num2nums(n)
+            n = self.numsPow()
+            if n == 1:
+                return True
+
+        return False
+
+    # 把计算数组平方和
+    def numsPow(self) -> int:
+        res = 0
+        for i in self.nums:
+            res += i * i
+        return res
+
+    # 把num拆分成数组
+    def num2nums(self, n: int) -> None:
+        self.nums = []
+        str_n = str(n)
+        for i in str_n:
+            self.nums.append(i)
+        self.nums = list(map(int, self.nums))
         return
 
 
 if __name__ == "__main__":
     solution = Solution()
-    num = 1
+    num = 20
+
     res = solution.isHappy(num)
     pass
